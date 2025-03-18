@@ -51,6 +51,7 @@
                                     <label for="status" class="mb-2">Kategori</label>
                                     <select name="category" id="dropdown"
                                         class="px-3 py-1 border border-gray-400/50 rounded-[8px] mb-6 w-full">
+                                        <option value="" disabled>Pilih Kategori</option>
                                         <option value="Men Originals">Men Originals</option>
                                         <option value="Men Sportwear">Men Sportwear</option>
                                         <option value="Men Jerseys">Men Jerseys</option>
@@ -63,6 +64,7 @@
                                     <label class="mb-2">Tipe Items</label>
                                     <select name="type" id="dropdown"
                                         class="px-3 py-1 border border-gray-400/50 rounded-[8px] mb-6 w-full">
+                                        <option value="" disabled>Pilih Tipe</option>
                                         <option value="shoes">Shoes</option>
                                         <option value="t-shirt">t-Shirt</option>
                                         <option value="jerseys">Jerseys</option>
@@ -75,7 +77,7 @@
                                 <!-- Name Input -->
                                 <div class="form-group flex flex-col">
                                     <label class="mb-2">Nama Items</label>
-                                    <input type="teks" name="name"
+                                    <input type="teks" name="name[]"
                                         class="px-3 py-2 border border-gray-400/50 rounded-[8px] mb-6"
                                         placeholder="Masukin Nama Items">
                                 </div>

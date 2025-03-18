@@ -121,7 +121,8 @@
                                     <input name="name" class="px-3 py-1 border-l border-t border-b border-gray-400/50"
                                         type="text" value="{{ request('name') }}" placeholder="Cari User...">
                                     <div class="inputgroup-append">
-                                        <button class=" text-white/40  hover:text-white bg-black border border-gray-400/50 font-semibold py-1 px-2"
+                                        <button
+                                            class=" text-white/40  hover:text-white bg-black border border-gray-400/50 font-semibold py-1 px-2"
                                             type="submit">Search</button>
                                     </div>
                                 </div>
@@ -135,7 +136,7 @@
                                 <th class="px-4 py-2 text-left font-semibold">Email</th>
                                 <th class="px-4 py-2 text-left font-semibold">Phone</th>
                                 <th class="px-4 py-2 text-left font-semibold">Role</th>
-                                <th class="px-4 py-2 text-center font-semibold">Action</th>
+                                <th class="px-4 py-2 text-center font-semibold"></th>
                             </tr>
 
 
@@ -156,27 +157,14 @@
                                     </span>
                                     @endif
                                 <td>
-                                    <a class="py-2 rounded-[5px] hover:bg-black/10 flex justify-center" href="#">edit
+                                    {{-- <a href="#" onclick="event.preventDefault(); document.getElementById('delete-user-{{ $user->id }}').submit()"
+                                        class="py-2 rounded-[5px] hover:bg-black/10 text-red-500 font-semibold flex justify-center">Delete
                                     </a>
+                                    <form action="{{ route('user.destroy', $user->id) }}" method="POST"
+                                        id="delete-user-{{ $user->id }}">@method('DELETE')@csrf</form> --}}
                                 </td>
                             </tr>
                             @endforeach
-
-
-
-                            {{-- @foreach ($users as $user)
-                            <tr class="border-b">
-                                <td class="px-4 py-2">{{ $user->name }}</td>
-                            <td class="px-4 py-2">jane.smith@example.com</td>
-                            <td class="px-4 py-2">8983992</td>
-                            <td class="px-4 py-2">
-                                <span class="bg-red-800/30 text-red-800 font-bold px-2 py-1 rounded-[5px] text-xs">Tidak
-                                    Aktif</span>
-                            </td>
-                            <td><a class="py-2 rounded-[5px] hover:bg-black/10 flex justify-center"
-                                    href="edit.html">edit</a></td>
-                            </tr>
-                            @endforeach --}}
 
 
 

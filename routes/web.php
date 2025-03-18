@@ -14,5 +14,11 @@ Route::get('/', function () {
 Route::middleware(['auth'])->get('home', [UserController::class, 'index']);
 
 
+// Route::middleware(['auth'])->group(function () {
+//     Route::get('home', [UserController::class, 'index'])->name('home');
+//     Route::delete('user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+// });
+
+
 // crud middleware
 Route::resource('product', ProductController::class);

@@ -33,22 +33,26 @@
                     </div>
                 </div>
                 <div class="main-content-items h-auto flex flex-col pt-10">
-                    <div class="cat-search flex justify-between">
-                        <div class="cat flex gap-2">
-                            <a href="#" class="cat-card bg-black text-white px-2 py-1 font-medium">Shoes</a>
-                            <a href="#"
-                                class="cat-card bg-[#C9C9C9] hover:bg-black hover:text-white text-white/80 px-2 py-1 font-medium">t-Shirt</a>
-                            <a href="#"
-                                class="cat-card bg-[#C9C9C9] hover:bg-black hover:text-white text-white/80 px-2 py-1 font-medium">Jerseys</a>
-                            <a href="#"
-                                class="cat-card bg-[#C9C9C9] hover:bg-black hover:text-white text-white/80 px-2 py-1 font-medium">Jacket</a>
-                            <a href="#"
-                                class="cat-card bg-[#C9C9C9] hover:bg-black hover:text-white text-white/80 px-2 py-1 font-medium">Hat</a>
+                    <div class="type-search flex justify-between">
+                        <div class="type flex gap-2">
+
+                            {{-- tombol all --}}
+                            <a href="{{ route('product.index', ['type' => 'all']) }}"
+                                class="type-card px-2 py-1 font-medium {{ request('type') === 'all' || !request('type') ? 'bg-black text-white' : 'bg-[#C9C9C9] hover:bg-black hover:text-white text-white/80' }}">All</a>
+
+
+                            @foreach (['Shoes', 't-Shirt', 'Jerseys', 'Jacket', 'Hat'] as $tipe)
+                            <a href="{{ route('product.index', ['type' => $tipe]) }}"
+                                class="type-card px-2 py-1 font-medium {{ request('type') === $tipe ? 'bg-black text-white' : 'bg-[#C9C9C9] hover:bg-black hover:text-white text-white/80' }}">{{ $tipe }}</a>
+                            @endforeach
+
                         </div>
+
+
                         <form>
                             <div class="inputgroup flex items-center">
-                                <input name="name" class="px-3 py-1 border-l border-t border-b border-gray-400/50 "
-                                    type="text" value="{{ request('name') }}" placeholder="Cari Items...">
+                                <input name="search" class="px-3 py-1 border-l border-t border-b border-gray-400/50 "
+                                    type="text" value="{{ request('search') }}" placeholder="Cari Items...">
                                 <div class="inputgroup-append">
                                     <button
                                         class=" text-white/40  hover:text-white bg-black border border-gray-400/50  font-semibold py-1 px-2"
@@ -57,28 +61,32 @@
                             </div>
                         </form>
                     </div>
-                    <div class="main-items flex flex-wrap gap-3 pt-5">
+                    <div class="main-items flex flex-wrap gap-3 pt-10">
+                        @if ($items->isEmpty())
+                        <p class="font-bold w-full text-center text-[13px]">Items Tidak Ada</p>
+                        @else
                         @foreach ( $items as $barang)
                         <div class="card flex flex-col gap-2 bg-[#FFFBE6] border border-black p-3">
                             <div class="img-area">
-                                @if ($barang->image)
-                                    <img src="{{ asset('storage/product/'.$barang->image) }}" width="340" alt="imageitems">
-                                @else
-                                    <span>No Image</span>
-                                @endif
+                                <img src="{{ asset('storage/products/' . $barang->image) }}" width="340" alt="">
                             </div>
                             <p class="font-light text-[20px]">{{ $barang->category }}</p>
                             <div class="price-name">
                                 <p class="text-[30px]">{{ $barang->name }}</p>
                                 <p class="text-[25px]">{{ 'Rp ' . number_format($barang->price, 0, ',', '.') }}</p>
                             </div>
-                            <div class="actionbtn flex gap-1 pt-2 items-center">
-                                <a href="" class="bg-black text-white py-1 px-2">Edit</a>
-                                <div class="bullet"></div>
-                                <a href="" class="bg-red-600 text-white py-1 px-2">Delete</a>
+                            <div class="actionbtn flex gap-3 pt-2 items-center">
+                                <a href="{{ route('product.edit', $barang->id) }}"
+                                    class="bg-black text-white py-1 px-2">Edit</a>
+                                <a href="#"
+                                    onclick="event.preventDefault(); document.getElementById('delete-form-{{ $barang->id }}').submit()"
+                                    class="bg-red-600 text-white py-1 px-2">Delete</a>
+                                <form action="{{ route('product.destroy', $barang->id) }}" method="POST"
+                                    id="delete-form-{{ $barang->id }}">@method('DELETE') @csrf</form>
                             </div>
                         </div>
                         @endforeach
+                        @endif
                     </div>
                 </div>
             </div>
